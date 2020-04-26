@@ -82,5 +82,9 @@ https://www.npmjs.com/package/react-webpack-typescript-starter
 - Typescript and react
 	https://www.typescriptlang.org/docs/handbook/react-&-webpack.html
 	https://create-react-app.dev/docs/adding-typescript/
+- webpack
+   https://blog.logrocket.com/versatile-webpack-configurations-for-your-react-application-e6ebf6615cc/
+   https://www.toptal.com/javascript/a-guide-to-managing-webpack-dependencies
+   https://symfonycasts.com/screencast/webpack-encore/external-libs
 - webpack and typescript
 	https://developerhandbook.com/webpack/how-to-create-a-production-ready-webpack-config/

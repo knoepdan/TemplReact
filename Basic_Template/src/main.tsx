@@ -8,6 +8,7 @@ import defaultCss from 'app/style/global.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Hello } from './app/components/Hello';
+import { TemplNotes } from './app/components/TemplNotes';
 
 import samplePng from 'app/img/samplePng.png';
 import sampleJpg from 'app/img/sampleJpg.jpg';
@@ -28,12 +29,13 @@ ReactDOM.render(
     <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
         <Hello compiler="Typescript" framework="React..." bundler="Webpack" />
         <br />
-        <div className="dotted-box p5">
+        <div className="dottedBoxBlaWillNotWorkBecauseCssIsCompiledAndNamesAreChanged">
             <img src={samplePng} alt="samplePng" />
             <img src={sampleJpg} alt="sampleJpg" />
             <img src={sampleGif} alt="sampleGif" />
             <img src={sampleSvg} alt="sampleSvg" style={imgStyle} />
         </div>
+        <TemplNotes></TemplNotes>
     </div>,
     document.getElementById('root'),
 );

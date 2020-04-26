@@ -138,7 +138,7 @@ module.exports = {
             // see  https://github.com/NMFR/optimize-css-assets-webpack-plugin/issues/53
             cssProcessorOptions: {
                 map: {
-                    inline: false,
+                    inline: isProduction, // will generate css sourcempas only in dev mode
                 },
             },
         }),
