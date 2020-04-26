@@ -14,10 +14,11 @@
         "predeploy": "npm run build",
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "webpack-dev-server --mode development --hot --progress --color --port 3000 --open",
-        "build": "webpack -p --progress --colors",
+        "build": "webpack -p --progress --colors && npm run CopyExternalConfigToBuild",
         "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\"",
         "lintfix": "npx eslint  src/**/**/* --fix",
-        "lint": "npx eslint  src/**/**/* --fix-dry-run"
+        "lint": "npx eslint  src/**/**/* --fix-dry-run",
+        "CopyExternalConfigToBuild": "xcopy /Y src\\externalConfig.prod.json build\\externalConfig.json*"
     },
     "license": "MIT",
     "devDependencies": {

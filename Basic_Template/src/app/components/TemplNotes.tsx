@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Config } from 'app/utils/Config';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -35,10 +36,39 @@ export const TemplNotes = (): React.ReactElement<Props> => {
             <h3>Configuration</h3>
             <ul>
                 <li>
-                    see:
-                    https://stackoverflow.com/questions/30568796/how-to-store-configuration-file-and-read-it-using-react
+                    Approach 1: load configuration via external call. See approach in this template. Corner points and
+                    stuff to keep in mind:
+                    <ul>
+                        <li>
+                            Configuration file must be served in dev and prod (for production: file is to be copied)
+                        </li>
+                        <li>
+                            When accessing the configuration, it must be ensured that file is loaded. Can be done prior
+                            to startig react or upon usage
+                        </li>
+                        <li>
+                            Can be eaysily saved to session storage, so even when using mulitple tabs, only one call to
+                            config is made
+                        </li>
+                    </ul>
+                    Testentry: {Config.TestEntry}
                 </li>
-                <li>Config.testEntry: ???</li>
+                <li>
+                    Approach 2: external config file as global variable. See:
+                    https://stackoverflow.com/questions/38272128/how-to-load-an-external-config-file-in-a-webpack-react-application-without-bundl
+                    Corner points and stuff to keep in mind:
+                    <ul>
+                        <li>
+                            Configuration file must be served in dev and prod (for production: file is to be copied)
+                        </li>
+                        <li>Html file must load it, will load each time (session will not work then)</li>
+                    </ul>
+                </li>
+                <li>
+                    Approach 3: bundle configuration via webpack and environment variable. example:
+                    http://www.matjazev.net/blog/2018/03/01/using-vue-spa-created-with-webpack-in-subfolder/
+                    Disadvantage: not suited when for every usecase because once built, configuration cannot be adapted
+                </li>
             </ul>
             <h3>Scalability</h3>
             <ul>
@@ -55,7 +85,8 @@ export const TemplNotes = (): React.ReactElement<Props> => {
             <ul>
                 <li>in code. 'import $ from 'jquery';global.$ = $;'</li>
                 <li>see: https://symfonycasts.com/screencast/webpack-encore/external-libs</li>
-                <li>Not recommended.. avoid it at all cost</li>
+                <li>probably also possible to just store it to window object or similar (not tested)</li>
+                <li>Not recommended.. </li>
             </ul>
         </div>
     );

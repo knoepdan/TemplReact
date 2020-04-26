@@ -5,6 +5,7 @@ import macroCss from 'app/style/global.macros.css';
 import defaultCss from 'app/style/global.css';
 
 // app
+import { Config } from 'app/utils/Config';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Hello } from './app/components/Hello';
@@ -25,27 +26,28 @@ if (false && normCss && macroCss && defaultCss) {
     console.log('');
 }
 
-ReactDOM.render(
-    <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
-        <Hello compiler="Typescript" framework="React..." bundler="Webpack" />
-        <br />
-        <div className="dottedBoxBlaWillNotWorkBecauseCssIsCompiledAndNamesAreChanged">
-            <img src={samplePng} alt="samplePng" />
-            <img src={sampleJpg} alt="sampleJpg" />
-            <img src={sampleGif} alt="sampleGif" />
-            <img src={sampleSvg} alt="sampleSvg" style={imgStyle} />
-        </div>
-        <TemplNotes></TemplNotes>
-    </div>,
-    document.getElementById('root'),
-);
-/*
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById('root')
-);
-*/
+Config.loadConfigFile(true)
+    .then((r) => {
+        console.log('Pre render! config loaded: ' + Config.isLoaded);
+        ReactDOM.render(
+            <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
+                <Hello compiler="Typescript" framework="React..." bundler="Webpack" />
+                <br />
+                <div className="dottedBoxBlaWillNotWorkBecauseCssIsCompiledAndNamesAreChanged">
+                    <img src={samplePng} alt="samplePng" />
+                    <img src={sampleJpg} alt="sampleJpg" />
+                    <img src={sampleGif} alt="sampleGif" style={{ maxHeight: '39px' }} />
+                    <img src={sampleSvg} alt="sampleSvg" style={imgStyle} />
+                </div>
+                <TemplNotes></TemplNotes>
+            </div>,
+            document.getElementById('root'),
+            () => {
+                console.log('render callback called. Config loaded: ' + Config.isLoaded);
+            },
+        );
+    })
+    .catch((ex) => {
+        alert('Error loading configuration: ' + ex.message);
+        console.error('Error loading config: ' + ex.message);
+    });

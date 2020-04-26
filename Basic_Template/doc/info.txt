@@ -38,7 +38,8 @@ other possible extensions (maybe not for basic template):
    https://eslint.org/docs/user-guide/getting-started
    -> apply Eslint+prettier upon save in VS code: install "ESLint (with 'autoFixOnSave..." + "Prettier - Code formatter" (will create vscode settings file)
 5. examples in code: favicon, usage of images including adding Ts support for images in global.d.ts, global css using css modules
-
+6. minifying CSS using "optimize-css-assets-webpack-plugin"
+7. External config file (including extended info in component)
 
 ########### General boilerplate links ###########
 good tutorial
