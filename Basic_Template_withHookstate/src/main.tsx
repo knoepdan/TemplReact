@@ -5,9 +5,11 @@ import macroCss from 'app/style/global.macros.css';
 import defaultCss from 'app/style/global.css';
 
 // app
+import { Config } from 'app/utils/Config';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Hello } from 'app/components/Hello';
+import { TemplNotes } from './app/components/TemplNotes';
 import { ReactHooksExample } from 'app/components/ReactHooksExample';
 import { ReactWrapperExample } from 'app/components/ReactWrapperExample';
 
@@ -25,20 +27,29 @@ if (false && normCss && macroCss && defaultCss) {
     console.log('');
 }
 
-ReactDOM.render(
-    <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
-        <Hello compiler="Typescript" framework="React..." bundler="Webpack" />
-        <ReactHooksExample />
-        <br />
-        <ReactWrapperExample />
-        <br />
-        <br />
-        <div className={macroCss.dottedBox + ' ' + macroCss.p5}>
-            <img src={samplePng} alt="samplePng" />
-            <img src={sampleJpg} alt="sampleJpg" />
-            <img src={sampleGif} alt="sampleGif" style={{ maxHeight: 50 }} />
-            <img src={sampleSvg} alt="sampleSvg" style={imgStyle} />
-        </div>
-    </div>,
-    document.getElementById('root'),
-);
+Config.loadConfigFile(true)
+    .then((r) => {
+        ReactDOM.render(
+            <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
+                <Hello compiler="Typescript" framework="React..." bundler="Webpack" />
+                <ReactHooksExample />
+                <br />
+                <ReactWrapperExample />
+                <br />
+                <br />
+                <div className={macroCss.dottedBox + ' ' + macroCss.p5}>
+                    <img src={samplePng} alt="samplePng" />
+                    <img src={sampleJpg} alt="sampleJpg" />
+                    <img src={sampleGif} alt="sampleGif" style={{ maxHeight: 50 }} />
+                    <img src={sampleSvg} alt="sampleSvg" style={imgStyle} />
+                </div>
+                <TemplNotes></TemplNotes>
+                <div className="dottedBoxBlaWillNotWorkBecauseCssIsCompiledAndNamesAreChanged"></div>
+            </div>,
+            document.getElementById('root'),
+        );
+    })
+    .catch((ex) => {
+        alert('Error loading configuration: ' + ex.message);
+        console.error('Error loading config: ' + ex.message);
+    });

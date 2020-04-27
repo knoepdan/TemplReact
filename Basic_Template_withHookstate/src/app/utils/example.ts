@@ -3,7 +3,7 @@ export class ExampleClass {
         console.log('TestClass.callAnything');
 
         try {
-            await fetch('wwwbla');
+            await fetch('wwwblarequestToFail');
             console.log('success ' + s);
         } catch (e) {
             // will always fail

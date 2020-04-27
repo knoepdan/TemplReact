@@ -58,7 +58,8 @@ Possible extensions:
 6. State with ReactHooks
 	https://github.com/avkonst/hookstate#quick-start
 7. examples in code: favicon, usage of images including adding Ts support for images in global.d.ts, global css using css modules
-
+8. minifying CSS using "optimize-css-assets-webpack-plugin"
+9. External config file (including extended info in component)
 
 
 ########### General boilerplate links ###########
@@ -114,3 +115,7 @@ https://www.npmjs.com/package/react-webpack-typescript-starter
 	https://gist.github.com/jackawatts/1c7a8d3c277ccf4e969675002fe35bc9 
 	https://jestjs.io/docs/en/tutorial-react 
 	https://www.pluralsight.com/guides/how-to-test-react-components-in-typescript  (good but not using enzype but some other library)
+- webpack
+   https://blog.logrocket.com/versatile-webpack-configurations-for-your-react-application-e6ebf6615cc/
+   https://www.toptal.com/javascript/a-guide-to-managing-webpack-dependencies
+   https://symfonycasts.com/screencast/webpack-encore/external-libs
