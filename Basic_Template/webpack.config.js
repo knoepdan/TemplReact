@@ -136,9 +136,11 @@ module.exports = {
         new OptimizeCSSAssetsPlugin({
             // // this would work too but no sourcemap would be generated:  new OptimizeCSSAssetsPlugin({}),
             // see  https://github.com/NMFR/optimize-css-assets-webpack-plugin/issues/53
+            // https://github.com/NMFR/optimize-css-assets-webpack-plugin/issues/81
             cssProcessorOptions: {
                 map: {
-                    inline: isProduction, // will generate css sourcempas only in dev mode
+                    inline: false, // will generate css sourcempas only in dev mode
+                    annotation: isProduction,
                 },
             },
         }),
