@@ -9,13 +9,11 @@ Requirements:
 - Some kind of Linting
 - File references (images, etc.)
 - Environment variables
--- can be very basic  (example: also be solved later by a separate config file 
+-- can be very basic
 - Build with minification
 - No major obstacles for a growing application
 
 wanted extensions (todo): 
-- minification of css
-- example of splitting js (and maybe css) into junks for performance
 - manifest etc. 
 - mobile icons (https://github.com/jantimon/favicons-webpack-plugin)
 
@@ -60,6 +58,9 @@ Possible extensions:
 7. examples in code: favicon, usage of images including adding Ts support for images in global.d.ts, global css using css modules
 8. minifying CSS using "optimize-css-assets-webpack-plugin"
 9. External config file (including extended info in component)
+10. Code splitting for scalibility example (tsconfig modules must be set accordingly)
+   https://reactjs.org/docs/code-splitting.html
+   https://stackoverflow.com/questions/54150819/using-react-lazy-with-typescript
 
 
 ########### General boilerplate links ###########

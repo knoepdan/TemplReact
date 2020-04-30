@@ -12,6 +12,7 @@ import { Hello } from 'app/components/Hello';
 import { TemplNotes } from './app/components/TemplNotes';
 import { ReactHooksExample } from 'app/components/ReactHooksExample';
 import { ReactWrapperExample } from 'app/components/ReactWrapperExample';
+import { AsyncLoadEx } from './app/components/AsyncLoadEx';
 
 import samplePng from 'app/img/samplePng.png';
 import sampleJpg from 'app/img/sampleJpg.jpg';
@@ -36,12 +37,14 @@ Config.loadConfigFile(true)
                 <br />
                 <ReactWrapperExample />
                 <br />
-                <br />
                 <div className={macroCss.dottedBox + ' ' + macroCss.p5}>
                     <img src={samplePng} alt="samplePng" />
                     <img src={sampleJpg} alt="sampleJpg" />
                     <img src={sampleGif} alt="sampleGif" style={{ maxHeight: 50 }} />
                     <img src={sampleSvg} alt="sampleSvg" style={imgStyle} />
+                </div>
+                <div className={macroCss.dottedBox + ' ' + macroCss.p10 + ' ' + macroCss.m5}>
+                    <AsyncLoadEx></AsyncLoadEx>
                 </div>
                 <TemplNotes></TemplNotes>
                 <div className="dottedBoxBlaWillNotWorkBecauseCssIsCompiledAndNamesAreChanged"></div>

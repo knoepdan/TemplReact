@@ -39,7 +39,7 @@ other possible extensions (maybe not for basic template):
 5. examples in code: favicon, usage of images including adding Ts support for images in global.d.ts, global css using css modules
 6. minifying CSS using "optimize-css-assets-webpack-plugin"
 8. External config file (including extended info in component)
-8. Code splitting for scalibility example (tsconfig modules must be set accordingly)
+9. Code splitting for scalibility example (tsconfig modules must be set accordingly)
    https://reactjs.org/docs/code-splitting.html
    https://stackoverflow.com/questions/54150819/using-react-lazy-with-typescript
 

@@ -3,7 +3,7 @@
         "sourceMap": true,
         "target": "ES2019",
         "jsx": "react",
-        "module": "es6",
+        "module": "esnext",
         "moduleResolution": "node",
         "experimentalDecorators": false,
         "allowSyntheticDefaultImports": true,

@@ -73,12 +73,35 @@ export const TemplNotes = (): React.ReactElement<Props> => {
             <h3>Scalability</h3>
             <ul>
                 <li>
-                    TODO (mainly lazy load of js files.. check https://webpack.js.org/guides/code-splitting/ (might be a
-                    false lead))
+                    Lazy load code (typescript code):
+                    <br />
+                    https://reactjs.org/docs/code-splitting.html <br />
+                    https://stackoverflow.com/questions/54150819/using-react-lazy-with-typescript
                 </li>
                 <li>
-                    Scripts from other sources (example: https://cdnjs.cloudflare.com/someScript.js), use externals:
+                    External (webpack configuration) Scripts from other sources (example:
+                    https://cdnjs.cloudflare.com/someScript.js), use externals:
                     https://symfonycasts.com/screencast/webpack-encore/external-libs
+                </li>
+                <li>
+                    Other ideas (not conclusive): <br />
+                    - lazy load css (maybe could just loaded dynamically)
+                    <br />
+                    - IFrame to lazy load content
+                    <br />
+                    - render parts on the server (first call)
+                    <br />
+                    - maybe bundler also offers more options
+                    <br />
+                    - Caching <br />
+                    -- app (with manifest etc.)
+                    <br />
+                    -- use browser cacher (to store data)
+                    <br />
+                    - Infrastructre (must sometimes be supported by software)
+                    <br />
+                    -- multiple servers to server data or scripts
+                    <br />
                 </li>
             </ul>
             <h3>Global variables (like $ in JQuery)</h3>
