@@ -9,6 +9,7 @@ import { Config } from 'app/utils/Config';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Hello } from './app/components/Hello';
+import { AsyncLoadEx } from './app/components/AsyncLoadEx';
 import { TemplNotes } from './app/components/TemplNotes';
 
 import samplePng from 'app/img/samplePng.png';
@@ -33,6 +34,9 @@ Config.loadConfigFile(true)
             <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
                 <Hello compiler="Typescript" framework="React..." bundler="Webpack" />
                 <br />
+                <div className={macroCss.dottedBox + ' ' + macroCss.p10 + ' ' + macroCss.m5}>
+                    <AsyncLoadEx></AsyncLoadEx>
+                </div>
                 <div className="dottedBoxBlaWillNotWorkBecauseCssIsCompiledAndNamesAreChanged">
                     <img src={samplePng} alt="samplePng" />
                     <img src={sampleJpg} alt="sampleJpg" />

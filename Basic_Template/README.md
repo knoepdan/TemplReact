@@ -1,6 +1,6 @@
 # Frontend Boilerplate for React and Typescript
 
-The project does not include **Server-Side Rendering**, **Testing Frameworks** (Jest etc.), **State management** (Redux, Mobx etc.)
+The project does not include **Server-Side Rendering**, **Testing Frameworks** (Jest etc.), **State management** (Redux, Mobx, StateHooks etc.)
 
 Other interesting templates:
 

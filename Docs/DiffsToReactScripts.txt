@@ -1,0 +1,29 @@
+React-scripts offers standard templats for react development with various options, among them typescript. Much of the webpack configuration - though accessible via "node_modules\react-scripts\" - is somewhat hidden to the normal developers. 
+While some configurations are similar or the same and others are visible different (like using sass instead of only css), other are only slightly different. 
+
+Here some differences are listed, especially ones that are not obvious at first glance. 
+
+### Differences ###
+
+## global typings (global.d.ts)
+- typings for images (especially svg) and css differ in react scripts
+
+## file-loader configuration
+in react-script file-loader will apply to all files except the ones that are excluded. 
+In these templates, the file endings file-loader should apply to are listed. Both should work
+
+## external configuration
+in react-script templates, no external config file included in default template as an example. Furthermore, how an external file would be copied (and maybe also how it is served in dev mode) would probably be different.  
+
+## No support for older browsers (IE)
+in react-script templates, there seems to be better support for older browsers and i believe there is even some support for showing a message when user accesses application with an unsupported browser (i think it can be configured). Here, we only support modern browsers (no IE), and some functionality might not work (such as asynchronous type script import because tsconfig modules is set esnext)
+
+
+
+
+
+
+
+
+Remark 1: list is in no way conclusive
+Remark 2: list might not apply to all templates 

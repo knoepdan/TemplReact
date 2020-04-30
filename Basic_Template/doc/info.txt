@@ -8,14 +8,12 @@ Requirements:
 - CSS modules
 - Some kind of Linting
 - File references (images, etc.)
-- Environment variables
+- Environment variables and configuration
 -- can be very basic  (example: also be solved later by a separate config file 
 - Build with minification
 - No major obstacles for a growing application
 
 wanted extensions (todo): 
-- minification of css
-- example of splitting js (and maybe css) into junks for performance
 - manifest etc. 
 - mobile icons
 
@@ -26,6 +24,7 @@ other possible extensions (maybe not for basic template):
 - state management
 - extended environment variables (probably not needed)
 - uglification (to some degree already achieved, most probably not needed)
+- typing for css (existing plugin: "typings-for-css-modules-loader" tried and did not get it running. not really needed anyway )
 
 
 ########### Steps done ###########
@@ -39,7 +38,11 @@ other possible extensions (maybe not for basic template):
    -> apply Eslint+prettier upon save in VS code: install "ESLint (with 'autoFixOnSave..." + "Prettier - Code formatter" (will create vscode settings file)
 5. examples in code: favicon, usage of images including adding Ts support for images in global.d.ts, global css using css modules
 6. minifying CSS using "optimize-css-assets-webpack-plugin"
-7. External config file (including extended info in component)
+8. External config file (including extended info in component)
+8. Code splitting for scalibility example (tsconfig modules must be set accordingly)
+   https://reactjs.org/docs/code-splitting.html
+   https://stackoverflow.com/questions/54150819/using-react-lazy-with-typescript
+
 
 ########### General boilerplate links ###########
 good tutorial
