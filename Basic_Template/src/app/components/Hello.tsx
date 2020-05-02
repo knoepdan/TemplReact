@@ -1,31 +1,22 @@
 import * as React from 'react';
-import * as style from './Hello.css';
 
-//import ss from 'src/style.css';
-//import styles from './../style.css';
-
-interface RProps {
+export interface HelloProps {
     compiler: string;
     framework: string;
     bundler: string;
 }
+export const Hello: React.FC<HelloProps> = (props: HelloProps) => {
+    return (
+        <div>
+            This is a {props.framework} application using {props.compiler} with {props.bundler} (process.env.NODE_ENV:{' '}
+            {process.env.NODE_ENV})
+        </div>
+    );
+};
 
-export class Hello extends React.Component<RProps, {}> {
-    /*
-    componentDidMount(): void {
-        const d = new TestClass();
-        d.callAnything('test call in componentDidMount');
-    }
-*/
-
-    render(): JSX.Element {
-        return (
-            <div className={style.hello}>
-                <h1>
-                    This is a {this.props.framework} application using {this.props.compiler} with {this.props.bundler}{' '}
-                    (process.env.NODE_ENV: {process.env.NODE_ENV})
-                </h1>
-            </div>
-        );
-    }
-}
+Hello.defaultProps = {
+    // if not passed, these values apply
+    compiler: 'COMPILER NOT PASSED ON PROPS',
+    framework: 'FRAMEWORK NOT PASSED ON PROPS',
+    bundler: 'BUNDLER NOT PASSED ON PROPS',
+};

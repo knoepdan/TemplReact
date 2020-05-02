@@ -9,18 +9,9 @@ import { Config } from 'app/utils/Config';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Hello } from './app/components/Hello';
+import { ImageExample } from './app/components/ImageExample';
 import { AsyncLoadEx } from './app/components/AsyncLoadEx';
 import { TemplNotes } from './app/components/TemplNotes';
-
-import samplePng from 'app/img/samplePng.png';
-import sampleJpg from 'app/img/sampleJpg.jpg';
-import sampleGif from 'app/img/sampleGif.gif';
-import sampleSvg from 'app/img/sampleSvg.svg';
-
-const imgStyle = {
-    maxHeight: '40px',
-    border: '5px solid pink',
-};
 
 // hack to ensure css that is to be global is loaded and no type errors
 if (false && normCss && macroCss && defaultCss) {
@@ -37,12 +28,7 @@ Config.loadConfigFile(true)
                 <div className={macroCss.dottedBox + ' ' + macroCss.p10 + ' ' + macroCss.m5}>
                     <AsyncLoadEx></AsyncLoadEx>
                 </div>
-                <div className="dottedBoxBlaWillNotWorkBecauseCssIsCompiledAndNamesAreChanged">
-                    <img src={samplePng} alt="samplePng" />
-                    <img src={sampleJpg} alt="sampleJpg" />
-                    <img src={sampleGif} alt="sampleGif" style={{ maxHeight: '39px' }} />
-                    <img src={sampleSvg} alt="sampleSvg" style={imgStyle} />
-                </div>
+                <ImageExample />
                 <TemplNotes></TemplNotes>
             </div>,
             document.getElementById('root'),
