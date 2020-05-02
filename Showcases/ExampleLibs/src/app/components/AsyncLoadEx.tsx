@@ -49,7 +49,7 @@ export const AsyncLoadEx = (): React.ReactElement<Props> => {
 
 /*
 
-// Route-based code splitting
+// Route-based code splitting (a simple wrapper would also be possible)
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 

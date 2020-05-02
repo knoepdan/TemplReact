@@ -1,26 +1,46 @@
 import * as React from 'react';
+import { Route, Link } from 'react-router-dom';
+import { RouterDemoDetails } from 'app/components/RouterDemoDetails';
 
-export interface HelloProps {
+export interface RouterDemoProps {
     compiler: string;
     framework: string;
     bundler: string;
 }
-export const Hello: React.FC<HelloProps> = (props: HelloProps) => {
+export const RouterDemo: React.FC<RouterDemoProps> = (props: RouterDemoProps) => {
     return (
         <div>
             This is a {props.framework} application using {props.compiler} with {props.bundler} (process.env.NODE_ENV:{' '}
-            {process.env.NODE_ENV})
+            {process.env.NODE_ENV}). And it showcases some basic router behavior.
+            <div>
+                <Route path="/router/:testid" exact component={RouterDemoDetails}></Route>
+
+                <ul>
+                    <li>
+                        <Link to="/router/3">Hello React-Router</Link>
+                    </li>
+                    <li>
+                        {' '}
+                        <Link to="/router/xx">Hello React-Router</Link>
+                    </li>
+                    <li>
+                        {' '}
+                        <Link to="/router/999">Hello React-Router</Link>
+                    </li>
+                </ul>
+            </div>
             <div>
                 react router and Typescript (sometimes be painful)
                 <br />
                 For example: <br />
                 <ul>
                     <li>
-                        Passing props (rarely needed. Often global state or passing param is the better options): <br />
+                        Passing props (rarely needed. Often global state or passing url param is the better options):{' '}
+                        <br />
                         Easiest solution I have found: WrapperComponent (as in this example, couldnt get typing to work)
                     </li>
                     <li>
-                        Passing params: see some links
+                        Passing url params: see example here or some links
                         <br />
                     </li>
                 </ul>
@@ -39,7 +59,7 @@ export const Hello: React.FC<HelloProps> = (props: HelloProps) => {
     );
 };
 
-Hello.defaultProps = {
+RouterDemo.defaultProps = {
     // if not passed, these values apply
     compiler: 'COMPILER NOT PASSED ON PROPS',
     framework: 'FRAMEWORK NOT PASSED ON PROPS',

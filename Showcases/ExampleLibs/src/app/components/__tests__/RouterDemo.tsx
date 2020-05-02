@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { Hello } from '../Hello';
+import { RouterDemo } from '../RouterDemo';
 
-describe('Hello', () => {
+describe('RouterDemo', () => {
     it('renders without crashing given the required props', () => {
         const props = {
             compiler: 'test-compiler',
             framework: 'test-framework',
             bundler: 'test-bundler',
         };
-        const wrapper = shallow(<Hello {...props} />);
+        const wrapper = shallow(<RouterDemo {...props} />);
         expect(toJson(wrapper)).toMatchSnapshot();
     });
 });

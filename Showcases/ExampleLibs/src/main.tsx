@@ -10,8 +10,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 
-import { Hello } from 'app/components/Hello';
+import { RouterDemo } from 'app/components/RouterDemo';
 import { TemplNotes } from './app/components/TemplNotes';
+import { ImageExample } from 'app/components/ImageExample';
 /*
 import { ReactHooksExample } from 'app/components/ReactHooksExample';
 import { ReactWrapperExample } from 'app/components/ReactWrapperExample';
@@ -23,9 +24,9 @@ if (false && normCss && macroCss && defaultCss) {
     console.log('');
 }
 
-export const HelloWrapper: React.FC = () => {
+export const RouterDemoWrapper: React.FC = () => {
     // to get the typings right with react-router and props (here framework/bundler/we) it is probably easiest to just write a wrapper
-    return <Hello framework="react" bundler="webpack" compiler="typescript"></Hello>;
+    return <RouterDemo framework="react" bundler="webpack" compiler="typescript"></RouterDemo>;
 };
 
 Config.loadConfigFile(true)
@@ -39,17 +40,21 @@ Config.loadConfigFile(true)
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Hello React-Router</Link>
+                                <Link to="/router">Hello React-Router</Link>
                             </li>
                             <li>
-                                <Link to="/notes">Notes</Link>
+                                <Link to="/images">Images</Link>
+                            </li>
+                            <li>
+                                <Link to="/">Notes</Link>
                             </li>
                         </ul>
                     </nav>
                     <div className={macroCss.solidBox + ' ' + macroCss.p10}>
                         <Switch>
-                            <Route path="/" exact component={HelloWrapper}></Route>
-                            <Route path="/notes" component={TemplNotes}></Route>
+                            <Route path="/router" component={RouterDemoWrapper}></Route>
+                            <Route path="/images" component={ImageExample}></Route>
+                            <Route path="/" exact component={TemplNotes}></Route>
                         </Switch>
                     </div>
                 </BrowserRouter>
