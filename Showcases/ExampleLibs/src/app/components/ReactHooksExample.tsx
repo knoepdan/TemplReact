@@ -14,14 +14,6 @@ setInterval(() => {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
-// ReactElement<Any>
-// React.SFC<Props>
-
-// TODO
-// - test async
-// - try externalize core stuff
-// then good to go
-
 export const ReactHooksExample = (): React.ReactElement<Props> => {
     const state = useStateLink(stateRef);
 

@@ -9,3 +9,22 @@ export const SimpleText = (): React.ReactElement<Props> => {
 };
 
 export default SimpleText as React.FC;
+
+/*
+
+This won't work with async
+
+// info if there are no props, just leave out the generic param
+export const SimpleText: React.FC<RProps> = (props) => {
+    return <span>I am a simple component ({props.test})</span>;
+};
+
+interface RProps {
+    test: string;
+}
+
+SimpleText.defaultProps = {
+    // if not passed, these values apply
+    test: 'no props passed',
+};
+*/

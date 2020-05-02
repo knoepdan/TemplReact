@@ -8,46 +8,51 @@ import defaultCss from 'app/style/global.css';
 import { Config } from 'app/utils/Config';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+
 import { Hello } from 'app/components/Hello';
 import { TemplNotes } from './app/components/TemplNotes';
+/*
 import { ReactHooksExample } from 'app/components/ReactHooksExample';
 import { ReactWrapperExample } from 'app/components/ReactWrapperExample';
 import { AsyncLoadEx } from './app/components/AsyncLoadEx';
+*/
 
-import samplePng from 'app/img/samplePng.png';
-import sampleJpg from 'app/img/sampleJpg.jpg';
-import sampleGif from 'app/img/sampleGif.gif';
-import sampleSvg from 'app/img/sampleSvg.svg';
-
-const imgStyle = {
-    maxHeight: '40px',
-    border: '5px solid pink',
-};
 // hack to ensure css that is to be global is loaded and no type errors
 if (false && normCss && macroCss && defaultCss) {
     console.log('');
 }
 
+export const HelloWrapper: React.FC = () => {
+    // to get the typings right with react-router and props (here framework/bundler/we) it is probably easiest to just write a wrapper
+    return <Hello framework="react" bundler="webpack" compiler="typescript"></Hello>;
+};
+
 Config.loadConfigFile(true)
     .then((r) => {
+        // Info regarding react-rounter
+        // - <Rout path="/" exact  -> without exact the path matches with a startwith logic. So normally, path="/" is used with exact.
+        // - <Switch - ensures only one component (the first one matching the path ) is returned
         ReactDOM.render(
-            <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
-                <Hello compiler="Typescript" framework="React..." bundler="Webpack" />
-                <ReactHooksExample />
-                <br />
-                <ReactWrapperExample />
-                <br />
-                <div className={macroCss.dottedBox + ' ' + macroCss.p5}>
-                    <img src={samplePng} alt="samplePng" />
-                    <img src={sampleJpg} alt="sampleJpg" />
-                    <img src={sampleGif} alt="sampleGif" style={{ maxHeight: 50 }} />
-                    <img src={sampleSvg} alt="sampleSvg" style={imgStyle} />
-                </div>
-                <div className={macroCss.dottedBox + ' ' + macroCss.p10 + ' ' + macroCss.m5}>
-                    <AsyncLoadEx></AsyncLoadEx>
-                </div>
-                <TemplNotes></TemplNotes>
-                <div className="dottedBoxBlaWillNotWorkBecauseCssIsCompiledAndNamesAreChanged"></div>
+            <div className={macroCss.p2}>
+                <BrowserRouter>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to="/">Hello React-Router</Link>
+                            </li>
+                            <li>
+                                <Link to="/notes">Notes</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div className={macroCss.solidBox + ' ' + macroCss.p10}>
+                        <Switch>
+                            <Route path="/" exact component={HelloWrapper}></Route>
+                            <Route path="/notes" component={TemplNotes}></Route>
+                        </Switch>
+                    </div>
+                </BrowserRouter>
             </div>,
             document.getElementById('root'),
         );
