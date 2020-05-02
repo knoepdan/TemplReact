@@ -17,20 +17,18 @@ export const RouterDemo: React.FC<RouterDemoProps> = (props: RouterDemoProps) =>
 
                 <ul>
                     <li>
-                        <Link to="/router/3">Hello React-Router</Link>
+                        <Link to="/router/3"> Details '3'</Link>
                     </li>
                     <li>
-                        {' '}
-                        <Link to="/router/xx">Hello React-Router</Link>
+                        <Link to="/router/xx"> Details 'xx'</Link>
                     </li>
                     <li>
-                        {' '}
-                        <Link to="/router/999">Hello React-Router</Link>
+                        <Link to="/router/999"> Details '999'</Link>
                     </li>
                 </ul>
             </div>
             <div>
-                react router and Typescript (sometimes be painful)
+                React router and Typescript (sometimes be painful)
                 <br />
                 For example: <br />
                 <ul>
@@ -39,9 +37,18 @@ export const RouterDemo: React.FC<RouterDemoProps> = (props: RouterDemoProps) =>
                         <br />
                         Easiest solution I have found: WrapperComponent (as in this example, couldnt get typing to work)
                     </li>
+                    <li>Passing url params: see example here or some links</li>
                     <li>
-                        Passing url params: see example here or some links
+                        <mark>
+                            For routing to work, server must always load the react application. (out of the box, this
+                            wont work in IIS for example as you might get a 404 because IIS expects a file at that
+                            route)
+                        </mark>
+                    </li>
+                    <li>
+                        Detail link might not support browser refresh in dev mode (depending on settings)
                         <br />
+                        https://stackoverflow.com/questions/29718481/unexpected-token-error-in-react-router-component
                     </li>
                 </ul>
                 Some react-router links:
