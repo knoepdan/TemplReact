@@ -13,6 +13,7 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { RouterDemo } from 'app/components/RouterDemo';
 import { TemplNotes } from './app/components/TemplNotes';
 import { ImageExample } from 'app/components/ImageExample';
+import { StylingLibsDemo } from 'app/components/StylingLibsDemo';
 /*
 import { ReactHooksExample } from 'app/components/ReactHooksExample';
 import { ReactWrapperExample } from 'app/components/ReactWrapperExample';
@@ -46,6 +47,9 @@ Config.loadConfigFile(true)
                                 <Link to="/images">Images</Link>
                             </li>
                             <li>
+                                <Link to="/styling">StylingLibsDemo</Link>
+                            </li>
+                            <li>
                                 <Link to="/">Notes</Link>
                             </li>
                         </ul>
@@ -54,6 +58,7 @@ Config.loadConfigFile(true)
                         <Switch>
                             <Route path="/router" component={RouterDemoWrapper}></Route>
                             <Route path="/images" component={ImageExample}></Route>
+                            <Route path="/styling" component={StylingLibsDemo}></Route>
                             <Route path="/" exact component={TemplNotes}></Route>
                         </Switch>
                     </div>
