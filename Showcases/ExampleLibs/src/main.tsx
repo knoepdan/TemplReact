@@ -14,6 +14,7 @@ import { RouterDemo } from 'app/components/RouterDemo';
 import { TemplNotes } from './app/components/TemplNotes';
 import { ImageExample } from 'app/components/ImageExample';
 import { StylingLibsDemo } from 'app/components/StylingLibsDemo';
+import { PrimeReactDemo } from 'app/components/PrimeReactDemo';
 /*
 import { ReactHooksExample } from 'app/components/ReactHooksExample';
 import { ReactWrapperExample } from 'app/components/ReactWrapperExample';
@@ -50,6 +51,9 @@ Config.loadConfigFile(true)
                                 <Link to="/styling">StylingLibsDemo</Link>
                             </li>
                             <li>
+                                <Link to="/primeReact">PrimeReact</Link>
+                            </li>
+                            <li>
                                 <Link to="/">Notes</Link>
                             </li>
                         </ul>
@@ -59,6 +63,7 @@ Config.loadConfigFile(true)
                             <Route path="/router" component={RouterDemoWrapper}></Route>
                             <Route path="/images" component={ImageExample}></Route>
                             <Route path="/styling" component={StylingLibsDemo}></Route>
+                            <Route path="/primeReact" component={PrimeReactDemo}></Route>
                             <Route path="/" exact component={TemplNotes}></Route>
                         </Switch>
                     </div>
