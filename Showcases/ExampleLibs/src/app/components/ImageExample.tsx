@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import macroCss from 'app/style/global.macros.css';
+import macroCss from 'app/style/global.macros.module.css';
 import samplePng from 'app/img/samplePng.png';
 import sampleJpg from 'app/img/sampleJpg.jpg';
 import sampleGif from 'app/img/sampleGif.gif';

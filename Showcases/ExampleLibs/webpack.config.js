@@ -50,21 +50,7 @@ module.exports = {
             {
                 oneOf: [
                     {
-                        test: /\.css$/,
-                        include: /node_modules/,
-                        use: [
-                            isProduction ? MiniCssExtractPlugin.loader : 'style-loader', //'style-loader',
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    modules: false,
-                                },
-                            },
-                        ],
-                    },
-
-                    {
-                        test: /\.css$/,
+                        test: /\.module\.css$/,
                         use: [
                             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                             {
@@ -95,6 +81,18 @@ module.exports = {
                                             disabled: isProduction,
                                         }),
                                     ],
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        test: /\.css$/,
+                        use: [
+                            isProduction ? MiniCssExtractPlugin.loader : 'style-loader', //'style-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    modules: false,
                                 },
                             },
                         ],

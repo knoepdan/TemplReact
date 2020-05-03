@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Route, Link } from 'react-router-dom';
 import { RouterDemoDetails } from 'app/components/RouterDemoDetails';
+import css from 'app/components/RouterDemo.module.css';
 
 export interface RouterDemoProps {
     compiler: string;
@@ -10,8 +11,10 @@ export interface RouterDemoProps {
 export const RouterDemo: React.FC<RouterDemoProps> = (props: RouterDemoProps) => {
     return (
         <div>
-            This is a {props.framework} application using {props.compiler} with {props.bundler} (process.env.NODE_ENV:{' '}
-            {process.env.NODE_ENV}). And it showcases some basic router behavior.
+            <span className={css.hello}>
+                This is a {props.framework} application using {props.compiler} with {props.bundler}{' '}
+                (process.env.NODE_ENV: {process.env.NODE_ENV}). And it showcases some basic router behavior.
+            </span>
             <div>
                 <Route path="/router/:testid" exact component={RouterDemoDetails}></Route>
 

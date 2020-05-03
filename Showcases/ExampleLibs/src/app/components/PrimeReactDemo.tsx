@@ -1,5 +1,5 @@
 import * as React from 'react';
-import macroCss from 'app/style/global.macros.css';
+import macroCss from 'app/style/global.macros.module.css';
 import { Slider } from 'primereact/slider';
 
 import { ColorPicker } from 'primereact/colorpicker';
