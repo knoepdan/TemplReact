@@ -90,7 +90,6 @@ module.exports = {
                     {
                         // normal css (non module css)
                         test: /\.css$/,
-                        include: /node_modules/,
                         use: [
                             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                             {
