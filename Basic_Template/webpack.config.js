@@ -47,39 +47,61 @@ module.exports = {
                 ].filter(Boolean),
             },
             // css
+
+            // css
             {
-                test: /\.css$/,
-                use: [
-                    isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                oneOf: [
                     {
-                        loader: 'css-loader',
-                        query: {
-                            modules: true,
-                            sourceMap: !isProduction,
-                            importLoaders: 1,
-                            modules: {
-                                localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]',
+                        // simpler configuration for third party css (assumed to be in node-modules)
+                        // from: https://medium.com/@marzelin/using-css-modules-with-third-party-stylesheets-c9633ff759c1
+                        test: /\.css$/,
+                        include: /node_modules/,
+                        use: [
+                            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    modules: false,
+                                },
                             },
-                            // localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]' see https://github.com/rails/webpacker/issues/2197
-                        },
+                        ],
                     },
                     {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [
-                                require('postcss-import')({ addDependencyTo: webpack }),
-                                require('postcss-url')(),
-                                require('postcss-preset-env')({
-                                    /* use stage 2 features (defaults) */
-                                    stage: 2,
-                                }),
-                                require('postcss-reporter')(),
-                                require('postcss-browser-reporter')({
-                                    disabled: isProduction,
-                                }),
-                            ],
-                        },
+                        // custom css
+                        test: /\.css$/,
+                        use: [
+                            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                            {
+                                loader: 'css-loader',
+                                query: {
+                                    modules: true,
+                                    sourceMap: !isProduction,
+                                    importLoaders: 1,
+                                    modules: {
+                                        localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]',
+                                    },
+                                    // localIdentName: isProduction ? '[hash:base64:5]' : '[local]__[hash:base64:5]' see https://github.com/rails/webpacker/issues/2197
+                                },
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    ident: 'postcss',
+                                    plugins: [
+                                        require('postcss-import')({ addDependencyTo: webpack }),
+                                        require('postcss-url')(),
+                                        require('postcss-preset-env')({
+                                            /* use stage 2 features (defaults) */
+                                            stage: 2,
+                                        }),
+                                        require('postcss-reporter')(),
+                                        require('postcss-browser-reporter')({
+                                            disabled: isProduction,
+                                        }),
+                                    ],
+                                },
+                            },
+                        ],
                     },
                 ],
             },
@@ -87,11 +109,39 @@ module.exports = {
                 oneOf: [
                     // static assets
                     { test: /\.html$/, use: 'html-loader', exclude: /index\.html$/ },
-                    { test: /\.(a?png|svg|jpg|gif)$/, use: 'url-loader?limit=10000' },
                     {
-                        test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/,
-                        use: 'file-loader',
+                        test: /\.(a?png|svg|jp?g|gif)$/,
+                        use: [
+                            {
+                                // url load is just like file-loader but will not externalize resources below a certain limit
+                                loader: 'url-loader', // example passing limit via query; "'url-loader?limit=10000' "
+                                options: {
+                                    limit: 8192,
+                                    name: 'static/img/[name].[hash:8].[ext]',
+                                },
+                            },
+                        ],
                     },
+                    {
+                        test: /\.(eot|ttf|woff|woff2)$/,
+                        use: [
+                            {
+                                loader: 'file-loader',
+                                options: {
+                                    name: 'static/font/[name].[hash:8].[ext]',
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        loader: require.resolve('file-loader'),
+                        // exclude files that are processed by other loaders (other solution would be to use oneof)
+                        exclude: [/\.(js|mjs|jsx|ts|tsx|css)$/, /\.html$/, /\.json$/],
+                        options: {
+                            name: 'static/etc/[name].[hash:8].[ext]',
+                        },
+                    },
+                    // dont add a loader below file-loader
                 ],
             },
         ],

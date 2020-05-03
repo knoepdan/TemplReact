@@ -9,8 +9,7 @@ Here some differences are listed, especially ones that are not obvious at first 
 - typings for images (especially svg) and css differ in react scripts
 
 ## file-loader configuration
-in react-script file-loader will apply to all files except the ones that are excluded. 
-In these templates, the file endings file-loader should apply to are listed. Both should work
+similar, file loader is the last loader that will process all files (except the ones listened). However, we use different folder names etc.
 
 ## external configuration
 in react-script templates, no external config file included in default template as an example. Furthermore, how an external file would be copied (and maybe also how it is served in dev mode) would probably be different.  
