@@ -1,4 +1,5 @@
 import * as React from 'react';
+import css from './Hello.module.css';
 
 export interface HelloProps {
     compiler: string;
@@ -8,8 +9,10 @@ export interface HelloProps {
 export const Hello: React.FC<HelloProps> = (props: HelloProps) => {
     return (
         <div>
-            This is a {props.framework} application using {props.compiler} with {props.bundler} (process.env.NODE_ENV:{' '}
-            {process.env.NODE_ENV})
+            <span className={css.hello}>
+                This is a {props.framework} application using {props.compiler} with {props.bundler}{' '}
+                (process.env.NODE_ENV: {process.env.NODE_ENV})
+            </span>
         </div>
     );
 };

@@ -47,26 +47,12 @@ module.exports = {
                 ].filter(Boolean),
             },
             // css
-
             {
                 oneOf: [
                     {
-                        // simpler configuration for third party css (assumed to be in node-modules)
-                        // from: https://medium.com/@marzelin/using-css-modules-with-third-party-stylesheets-c9633ff759c1
-                        test: /\.css$/,
-                        include: /node_modules/,
-                        use: [
-                            isProduction ? MiniCssExtractPlugin.loader : 'style-loader', //'style-loader',
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    modules: false,
-                                },
-                            },
-                        ],
-                    },
-                    {
-                        test: /\.css$/,
+                        // module css
+                        // https://medium.com/@marzelin/using-css-modules-with-third-party-stylesheets-c9633ff759c1
+                        test: /\.module\.css$/,
                         use: [
                             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                             {
@@ -97,6 +83,19 @@ module.exports = {
                                             disabled: isProduction,
                                         }),
                                     ],
+                                },
+                            },
+                        ],
+                    },
+                    {
+                        // normal css (non module css)
+                        test: /\.css$/,
+                        use: [
+                            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    modules: false,
                                 },
                             },
                         ],

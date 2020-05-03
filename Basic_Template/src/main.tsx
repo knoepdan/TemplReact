@@ -1,8 +1,8 @@
 // include css in top component in correct order (to mimick a global css)
 // styles have to be applied value. Example:  className={macroCss.pt2}
-import normCss from 'app/style/global.normalize.css';
-import macroCss from 'app/style/global.macros.css';
-import defaultCss from 'app/style/global.css';
+import normCss from 'app/style/global.normalize.module.css';
+import macroCss from 'app/style/global.macros.module.css';
+import defaultCss from 'app/style/global.module.css';
 
 // app
 import { Config } from 'app/utils/Config';

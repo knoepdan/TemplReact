@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Config } from 'app/utils/Config';
-import macroCss from 'app/style/global.macros.css';
+import macroCss from 'app/style/global.macros.module.css';
 
 // Import component lazy load
 // (must have default export defined to work with typescript)

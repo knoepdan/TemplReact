@@ -1,0 +1,3 @@
+## Potential issues in combination with react-router
+- detail pathsm (excample: "/list/detail/:id), a browser refresh will not work. (see showcase, it seems that valid js requests return html instead of js)
+- production environment (IIS) has to be configured so all paths return the index file (otherwise we get a 404)
