@@ -61,7 +61,11 @@ Possible extensions:
 10. Code splitting for scalibility example (tsconfig modules must be set accordingly)
    https://reactjs.org/docs/code-splitting.html
    https://stackoverflow.com/questions/54150819/using-react-lazy-with-typescript
-
+11. Set baseTag in index.html during build. Helpful in combination with reactRouter as we need a base url then.
+    let baseHref = document.getElementsByTagName('base')[0].dataset.href;
+	<BrowserRouter basename={baseHref}>
+12. Add web.config which is configured for url rewrite so any url, except those for existing files, return index.html. (Important if we work router libraries)
+	ttps://www.iis.net/downloads/microsoft/url-rewrite  (Download for IIS URL Rewrite plugin)
 
 ########### General boilerplate links ###########
 good tutorial

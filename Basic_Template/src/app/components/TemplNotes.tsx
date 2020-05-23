@@ -51,6 +51,8 @@ export const TemplNotes = (): React.ReactElement<Props> => {
                             config is made
                         </li>
                     </ul>
+                    Remark: current approach with setting base tag in index.html should also work well with react router
+                    <br />
                     Testentry: {Config.TestEntry}
                 </li>
                 <li>
