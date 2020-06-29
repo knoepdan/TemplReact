@@ -3,6 +3,7 @@ import * as state from 'app/utils/State';
 import { UserModel } from 'app/common/UserState';
 //import { Right } from 'app/common/Right';
 import * as mainNav from 'app/main/MainNavigation';
+import * as adminNav from 'app/admin/AdminNavigation';
 import * as devNav from 'app/dev/DevNavigation';
 
 export interface IRoute {
@@ -41,12 +42,17 @@ export function getNavigation(user: UserModel): NavigationModel {
     navModel.topMenues.push(m);
     mainNav.addMainMenues(m);
 
-    // we could hide nav like this: if (user && user.isLoggedIn) {
+    if (user && user.isLoggedIn) {
+        // admin
+        let a = new MenuItem(null, 'Admin-Area');
+        navModel.topMenues.push(a);
+        adminNav.addAdminMenues(a);
 
-    let d = new MenuItem(null, 'Developer-Area');
-    navModel.topMenues.push(d);
-    devNav.addDevMenues(d);
-
+        // dev
+        let d = new MenuItem(null, 'Developer-Area');
+        navModel.topMenues.push(d);
+        devNav.addDevMenues(d);
+    }
     return navModel;
 }
 
