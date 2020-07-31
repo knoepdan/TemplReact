@@ -1,4 +1,21 @@
-import * as state from 'app/utils/CustomState';
+import { BaseState } from 'app/utils/BaseState';
+import { State, self } from '@hookstate/core';
+import { SetStateAction } from 'react';
+
+export class GlobalStateWrapper extends BaseState<GlobalState>{
+
+    constructor(s : GlobalState){
+        super(s);
+    }
+    // overwrite wrapState to offer functions (often not needed, set/get are enough)
+    // often not needed, but then one would have to also set the basic methods like get/set again
+    protected wrapState = (s: State<GlobalState>) => ({
+            get: () => s[self].value,
+            set: (newValue: SetStateAction<GlobalState>) => {s[self].set(newValue)}
+    })
+}
+export const globalStateRef = new GlobalStateWrapper(getInitialGlobalState());
+
 
 function getInitialGlobalState(): GlobalState {
     const g = {
@@ -15,9 +32,7 @@ function getInitialGlobalState(): GlobalState {
     return g as GlobalState;
 }
 
-export const globalStateRef = new state.StateRef(getInitialGlobalState());
-
-export const uiStateRef = new state.StateRef({ username: 'testuser', loggedInDate: new Date() });
+export const uiStateRef = new BaseState<GlobalUiState>({ username: 'testuser', loggedInDate: new Date() });
 
 export interface ArrayContent {
     title: string;
