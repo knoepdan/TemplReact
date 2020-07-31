@@ -1,17 +1,22 @@
-import { createState, useState, State, StateMixinDestroy, self } from '@hookstate/core';
+import { createState, useState, State, StateMethodsDestroy } from '@hookstate/core';
 import { SetStateAction } from 'react';
 
 export class BaseState<T> {
     constructor(initialState : T){
         this.globalState = createState(initialState);
     }
-    protected globalState : State<T> & StateMixinDestroy;
+    protected globalState : State<T> & StateMethodsDestroy;
     protected wrapState = (s: State<T>) => ({
-        get: () => s[self].value,
-        set: (newValue: SetStateAction<T>) => {s[self].set(newValue)}
+        get: () => s.value,
+        set: (newValue: SetStateAction<T>) => {s.set(newValue)}
     })
     public accessGlobalState = () => this.wrapState(this.globalState)
     public useGlobalState = () => this.wrapState(useState(this.globalState))
+    
+    
+    public destroy() : void {
+        this.globalState.destroy(); // object will no longer work correctly
+    }
 }
 
 /* example using a simple state (extending wrap function, which is not always needed)

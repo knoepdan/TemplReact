@@ -1,5 +1,5 @@
 import { BaseState } from 'app/utils/BaseState';
-import { State, self } from '@hookstate/core';
+import { State } from '@hookstate/core';
 import { SetStateAction } from 'react';
 
 export class GlobalStateWrapper extends BaseState<GlobalState>{
@@ -10,8 +10,8 @@ export class GlobalStateWrapper extends BaseState<GlobalState>{
     // overwrite wrapState to offer functions (often not needed, set/get are enough)
     // often not needed, but then one would have to also set the basic methods like get/set again
     protected wrapState = (s: State<GlobalState>) => ({
-            get: () => s[self].value,
-            set: (newValue: SetStateAction<GlobalState>) => {s[self].set(newValue)}
+            get: () => s.value,
+            set: (newValue: SetStateAction<GlobalState>) => {s.set(newValue)}
     })
 }
 export const globalStateRef = new GlobalStateWrapper(getInitialGlobalState());
