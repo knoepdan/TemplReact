@@ -21,7 +21,7 @@ if (false && normCss && macroCss && defaultCss) {
 }
 
 Config.loadConfigFile(true)
-    .then((r) => {
+    .then(() => {
         ReactDOM.render(
             <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
                 <Hello compiler="Typescript" framework="React..." bundler="Webpack" />

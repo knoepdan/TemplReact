@@ -1,9 +1,9 @@
-interface IConfig {
+interface BaseConfig {
     APIUrl: string;
     TestEntry: string;
 }
 
-const defaultConfig: IConfig = {
+const defaultConfig: BaseConfig = {
     APIUrl: '',
     TestEntry: 'Default-Testentry',
 };
@@ -31,15 +31,15 @@ export class Config {
     }
 
     static get isLoaded(): boolean {
-        let val = sessionStorage.getItem(confKey);
+        const val = sessionStorage.getItem(confKey);
         if (val) {
             return true;
         }
         return false;
     }
 
-    private static getConfig(): IConfig {
-        let val = sessionStorage.getItem(confKey);
+    private static getConfig(): BaseConfig {
+        const val = sessionStorage.getItem(confKey);
         if (val) {
             return JSON.parse(val);
         }

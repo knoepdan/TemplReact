@@ -2,19 +2,20 @@ import { createState, useState, State, StateMethodsDestroy } from '@hookstate/co
 import { SetStateAction } from 'react';
 
 export class BaseState<T> {
-    constructor(initialState : T){
+    constructor(initialState: T) {
         this.globalState = createState(initialState);
     }
-    protected globalState : State<T> & StateMethodsDestroy;
+    protected globalState: State<T> & StateMethodsDestroy;
     protected wrapState = (s: State<T>) => ({
         get: () => s.value,
-        set: (newValue: SetStateAction<T>) => {s.set(newValue)}
-    })
-    public accessGlobalState = () => this.wrapState(this.globalState)
-    public useGlobalState = () => this.wrapState(useState(this.globalState))
-    
-    
-    public destroy() : void {
+        set: (newValue: SetStateAction<T>) => {
+            s.set(newValue);
+        },
+    });
+    public accessGlobalState = () => this.wrapState(this.globalState);
+    public useGlobalState = () => this.wrapState(useState(this.globalState));
+
+    public destroy(): void {
         this.globalState.destroy(); // object will no longer work correctly
     }
 }
