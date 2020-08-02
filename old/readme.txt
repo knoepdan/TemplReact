@@ -1,0 +1,1 @@
+Templates in this folder are no longer activly maintained
