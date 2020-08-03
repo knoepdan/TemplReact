@@ -4,6 +4,7 @@ import macroCss from 'app/style/global.macros.module.css';
 import * as userState from 'app/common/UserState';
 import * as nav from 'app/common/NavigationState';
 import { NavLink } from 'react-router-dom';
+import { useState as globalState } from '@hookstate/core';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -12,7 +13,7 @@ export const SideNavHtmlId = 'sideNav';
 
 // more or less random notes about webpack setup
 export const SideNav = (): React.ReactElement<Props> => {
-    const userStateRef = userState.userStateRef.useState();
+    const userStateRef = globalState(userState.userStateRef);
     const navModel = nav.getNavigation(userStateRef.value);
 
     return (
@@ -24,7 +25,7 @@ export const SideNav = (): React.ReactElement<Props> => {
 
             <ul>
                 {navModel.topMenues.map((topNav, index) => (
-                    <li className={macroCss.p10}>
+                    <li key={index} className={macroCss.p10}>
                         <AreaNav topNav={topNav}></AreaNav>
                     </li>
                 ))}
@@ -53,7 +54,7 @@ interface AreaNavProps {
 }
 
 const AreaNav = (props: AreaNavProps): React.ReactElement<AreaNavProps> => {
-    let subLink = (subNav: nav.MenuItem): React.ReactElement => {
+    const subLink = (subNav: nav.MenuItem): React.ReactElement => {
         if (subNav.route && subNav.route.getRoute()) {
             return (
                 <NavLink to={subNav.route.getRoute()} activeClassName={css.navActive}>
@@ -65,10 +66,10 @@ const AreaNav = (props: AreaNavProps): React.ReactElement<AreaNavProps> => {
         }
     };
 
-    const onLiClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    const onLiClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>): boolean => {
         e.stopPropagation();
-        let el: any = e.target;
-        let l: HTMLLinkElement = el.querySelector('a');
+        const el: any = e.target;
+        const l: HTMLLinkElement = el.querySelector('a');
         if (l) {
             l.click();
         }

@@ -1,4 +1,4 @@
-import * as state from 'app/utils/State';
+import * as state from '@hookstate/core';
 import { Right } from 'app/common/Right';
 
 export interface UserState {
@@ -11,25 +11,25 @@ export interface UserState {
 }
 
 export class UserModel {
-    isLoggedIn: boolean = false;
-    username: string = '';
+    isLoggedIn = false;
+    username = '';
     permissions = new Array<Right>();
 
     public hasRight(right: Right): boolean {
         return this.permissions.some((r) => r == right);
     }
 
-    public logIn(user: string) {
+    public logIn(user: string): void {
         this.username = user;
         this.isLoggedIn = true;
     }
-    public logOut() {
+    public logOut(): void {
         this.username = '';
         this.isLoggedIn = false;
     }
 }
 
-export const userStateRef = new state.StateRef(new UserModel());
+export const userStateRef = state.createState(new UserModel());
 
 /*
 function getInitialGlobalState(): GlobalState {

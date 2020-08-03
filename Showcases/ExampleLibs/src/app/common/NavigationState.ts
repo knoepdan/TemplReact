@@ -1,7 +1,9 @@
-import * as state from 'app/utils/State';
+import * as state from '@hookstate/core';
 
+import * as React from 'react';
 import { UserModel } from 'app/common/UserState';
-//import { Right } from 'app/common/Right';
+import { LoginPage } from 'app/LoginPage';
+import { Right } from 'app/common/Right';
 import * as mainNav from 'app/main/MainNavigation';
 import * as adminNav from 'app/admin/AdminNavigation';
 import * as devNav from 'app/dev/DevNavigation';
@@ -27,33 +29,26 @@ export class RouteInfo implements IRoute {
         return this.route;
     }
     public getComponent(): () => JSX.Element {
-        return () => {
+        return (): JSX.Element => {
             return this.component;
         };
     }
 }
-//(n: number) => any
 
-export function getNavigation(user: UserModel): NavigationModel {
-    let navModel = new NavigationModel();
-
-    // main
-    let m = new MenuItem(null, 'Main-Area');
-    navModel.topMenues.push(m);
-    mainNav.addMainMenues(m);
-
-    if (user && user.isLoggedIn) {
-        // admin
-        let a = new MenuItem(null, 'Admin-Area');
-        navModel.topMenues.push(a);
-        adminNav.addAdminMenues(a);
-
-        // dev
-        let d = new MenuItem(null, 'Developer-Area');
-        navModel.topMenues.push(d);
-        devNav.addDevMenues(d);
+export class MenuItem {
+    constructor(parent: MenuItem | null, label: string, route: IRoute | null = null) {
+        this.parent = parent;
+        this.label = label;
+        this.route = route;
+        /*if (this.parent) { // must be done outsice
+            this.parent.children.push(this);
+        }*/
     }
-    return navModel;
+
+    public parent: MenuItem | null = null;
+    public children: Array<MenuItem> = new Array<MenuItem>();
+    public label = '';
+    public route: IRoute | null = null;
 }
 
 export class NavigationModel {
@@ -72,34 +67,56 @@ export class NavigationModel {
         if (menu.route) {
             a.push(menu.route);
         }
-        for (let child of menu.children) {
+        for (const child of menu.children) {
             NavigationModel.getRoutesRec(a, child);
         }
     }
 
     public getRoutes(): Array<IRoute> {
-        let a = new Array<IRoute>();
-        for (let m of this.topMenues) {
+        const a = new Array<IRoute>();
+        for (const m of this.topMenues) {
             NavigationModel.getRoutesRec(a, m);
         }
         return a;
     }
 }
 
-export class MenuItem {
-    constructor(parent: MenuItem | null, label: string, route: IRoute | null = null) {
-        this.parent = parent;
-        this.label = label;
-        this.route = route;
-        /*if (this.parent) { // must be done outsice
-            this.parent.children.push(this);
-        }*/
-    }
+export class Routes {
+    public static readonly LoginRoute = new RouteInfo('/login', React.createElement(LoginPage));
 
-    public parent: MenuItem | null = null;
-    public children: Array<MenuItem> = new Array<MenuItem>();
-    public label: string = '';
-    public route: IRoute | null = null;
+    // just the routes
+    public static readonly PublicMainTo = '/main/entry';
 }
 
-export const navStateRef = new state.StateRef(new NavigationModel());
+export function getNavigation(user: UserModel): NavigationModel {
+    const navModel = new NavigationModel();
+
+    // login
+    const loginMenu = new MenuItem(null, 'Login');
+    loginMenu.route = Routes.LoginRoute;
+    navModel.topMenues.push(loginMenu);
+
+    // main
+    const m = new MenuItem(null, 'Main-Area');
+    navModel.topMenues.push(m);
+    mainNav.addMainMenues(m);
+
+    if (user && user.isLoggedIn) {
+        // admin
+        if (user.hasRight(Right.AdminArea)) {
+            const a = new MenuItem(null, 'Admin-Area');
+            navModel.topMenues.push(a);
+            adminNav.addAdminMenues(a);
+        }
+
+        // dev
+        if (user.hasRight(Right.DevArea)) {
+            const d = new MenuItem(null, 'Developer-Area');
+            navModel.topMenues.push(d);
+            devNav.addDevMenues(d);
+        }
+    }
+    return navModel;
+}
+
+export const navStateRef = state.createState(new NavigationModel());

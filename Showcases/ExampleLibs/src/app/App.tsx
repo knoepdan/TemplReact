@@ -9,17 +9,18 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // main stuff
 import { TopBar } from 'app/layout/TopBar';
-import { Login } from 'app/Login';
+//import { LoginPage } from 'app/LoginPage';
 import * as userState from 'app/common/UserState';
 import * as nav from 'app/common/NavigationState';
 import { SideNav } from './layout/SideNav';
+import { useState as globalState } from '@hookstate/core';
 
 // Info regarding react-rounter
 // - <Rout path="/" exact  -> without exact the path matches with a startwith logic. So normally, path="/" is used with exact.
 // - <Switch - ensures only one component (the first one matching the path ) is returned
 export const App = (): React.ReactElement => {
     console.log('App rendered');
-    const userStateRef = userState.userStateRef.useState();
+    const userStateRef = globalState(userState.userStateRef);
     const navModel = nav.getNavigation(userStateRef.value);
 
     // Ensure navigation works (and references etc. in third party libs too, config call etc.)
@@ -33,28 +34,24 @@ export const App = (): React.ReactElement => {
         baseHref = baseTag[0].dataset.href; // example base tag: <base href="/app" data-href="/app" />    (for dev "/" is normally ok)
     }
     return (
-        <div>
-            <BrowserRouter basename={baseHref}>
-                <TopBar />
-                <SideNav />
-                <div className={css.mainContent}>
-                    <div className={macroCss.p2}>
-                        <Login></Login>
-                        <br />
-                        <Switch>
-                            {navModel.getRoutes().map((route, index) => (
-                                <Route
-                                    key={index}
-                                    path={route.getRoute()}
-                                    exact={route.exact}
-                                    component={route.getComponent()}
-                                />
-                            ))}
-                        </Switch>
-                    </div>
+        <BrowserRouter basename={baseHref}>
+            <TopBar />
+            <SideNav />
+            <div className={css.mainContent}>
+                <div className={macroCss.p2}>
+                    <Switch>
+                        {navModel.getRoutes().map((route, index) => (
+                            <Route
+                                key={index}
+                                path={route.getRoute()}
+                                exact={route.exact}
+                                component={route.getComponent()}
+                            />
+                        ))}
+                    </Switch>
                 </div>
-            </BrowserRouter>
-        </div>
+            </div>
+        </BrowserRouter>
     );
 };
 
