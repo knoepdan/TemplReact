@@ -47,7 +47,7 @@ namespace ReactWithNet.Controllers
         {
             var model = new SpaModel();
 
-            var relativeDistFolder = "wwwroot";
+            var relativeDistFolder = "wwwroot/dist";
             var rootPath = this._env.ContentRootPath; // C:\Dev\Github\TemplReact\Template_withNet\ReactWithNet
             var distFolder = new System.IO.DirectoryInfo(System.IO.Path.Combine(rootPath, relativeDistFolder));
             
@@ -57,7 +57,7 @@ namespace ReactWithNet.Controllers
 
             foreach(var css in cssFiles)
             {
-                string webRef = "" + css.Name;
+                string webRef = GetDistNameReference(css);
                 model.CssRefs.Add(webRef);
             }
 
@@ -73,18 +73,18 @@ namespace ReactWithNet.Controllers
 
 
                 // normal stuff
-                string webRef = "" + js.Name;
+                string webRef = GetDistNameReference(js);
                 model.JsRefs.Add(webRef);
             }
 
             foreach (var js in jsFiles.Where(x => x.Name.StartsWith("vendor.")))
             {
-                string webRef = "" + js.Name;
+                string webRef = GetDistNameReference(js);
                 model.JsRefs.Add(webRef);
             }
             foreach (var js in jsFiles.Where(x => x.Name.StartsWith("app.")))
             {
-                string webRef = "" + js.Name;
+                string webRef = GetDistNameReference(js);
                 model.JsRefs.Add(webRef);
             }
 
@@ -92,6 +92,14 @@ namespace ReactWithNet.Controllers
 
 
             return model;
+        }
+        private static string GetDistNameReference(string name)
+        {
+            return "dist/" + name;
+        }
+        private static string GetDistNameReference(System.IO.FileInfo file)
+        {
+            return GetDistNameReference(file.Name);
         }
     }
 }

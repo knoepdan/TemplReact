@@ -5,7 +5,7 @@ const package = require('./package.json');
 // variables
 const isProduction = process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
 const sourcePath = path.join(__dirname, './src');
-const outPath = path.join(__dirname, '../wwwroot');
+const outPath = path.join(__dirname, '../wwwroot/dist');
 
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -20,6 +20,7 @@ module.exports = {
     },
     output: {
         path: outPath,
+		publicPath: "/dist/", // path for webserver
         filename: isProduction ? '[contenthash].js' : '[hash].js',
         chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js',
     },
@@ -193,7 +194,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
 			inject: "body",
-			filename: "../../Views/Shared/_Layout.Template.cshtml",
+			filename: "../../Views/Shared/_Layout.TemplateXX.cshtml",
             template: "../../Views/Shared/_Layout.Template.cshtml",
             favicon: 'assets/favicon.ico',
             scriptLoading: 'defer',
@@ -222,7 +223,7 @@ module.exports = {
         }),
     ],
     devServer: {
-        contentBase: sourcePath,
+        contentBase: sourcePath, // outPath
         hot: true,
         inline: true,
         historyApiFallback: {
@@ -230,6 +231,15 @@ module.exports = {
         },
         stats: 'minimal',
         clientLogLevel: 'warning',
+		
+		/*
+		index: '', // specify to enable root proxying
+		proxy: {
+			context: () => true, // proxy all requests for debug 
+			target: 'https://localhost:5001', // to ASP.NET Core (applicationUrl defined in launcherSettings)
+			secure: false, // Debug: don't verify the self-signed certificate
+		}
+		*/
     },
     // https://webpack.js.org/configuration/devtool/
     devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map',
