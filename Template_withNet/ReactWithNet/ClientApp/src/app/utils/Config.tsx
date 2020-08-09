@@ -39,6 +39,8 @@ export class Config {
     }
 
     private static getConfig(): BaseConfig {
+      return defaultConfig;
+      /*
         const val = sessionStorage.getItem(confKey);
         if (val) {
             return JSON.parse(val);
@@ -47,6 +49,7 @@ export class Config {
             Config.loadConfigFile(true); // in dev: make sure config is always/regularly refreshed
         }
         throw new Error('Config was not in session. Means it was not loaded before');
+        */
     }
 
     static get APIUrl(): string {

@@ -5,7 +5,7 @@ import macroCss from 'app/style/global.macros.module.css';
 import defaultCss from 'app/style/global.module.css';
 
 // app
-import { Config } from 'app/utils/Config';
+//import { Config } from 'app/utils/Config';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Hello } from 'app/components/Hello';
@@ -20,8 +20,8 @@ if (false && normCss && macroCss && defaultCss) {
     console.log('');
 }
 
-Config.loadConfigFile(true)
-    .then(() => {
+//Config.loadConfigFile(true)
+ //   .then(() => {
         ReactDOM.render(
             <div className={macroCss.solidBox + ' ' + macroCss.m5 + ' ' + macroCss.p10}>
                 <Hello compiler="Typescript" framework="React..." bundler="Webpack" />
@@ -38,8 +38,8 @@ Config.loadConfigFile(true)
             </div>,
             document.getElementById('root'),
         );
-    })
-    .catch((ex) => {
-        alert('Error loading configuration: ' + ex.message);
-        console.error('Error loading config: ' + ex.message);
-    });
+   // })
+   // .catch((ex) => {
+    //    alert('Error loading configuration: ' + ex.message);
+    //    console.error('Error loading config: ' + ex.message);
+    //});

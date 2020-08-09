@@ -5,7 +5,7 @@ const package = require('./package.json');
 // variables
 const isProduction = process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
 const sourcePath = path.join(__dirname, './src');
-const outPath = path.join(__dirname, './build');
+const outPath = path.join(__dirname, '../wwwroot');
 
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -192,7 +192,9 @@ module.exports = {
             },
         }),
         new HtmlWebpackPlugin({
-            template: 'assets/index.html',
+			inject: "body",
+			filename: "../../Views/Shared/_Layout.Template.cshtml",
+            template: "../../Views/Shared/_Layout.Template.cshtml",
             favicon: 'assets/favicon.ico',
             scriptLoading: 'defer',
             title: 'React template',

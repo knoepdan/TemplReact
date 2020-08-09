@@ -1,8 +1,35 @@
-﻿@{
+﻿@model SpaModel;
+@{
     ViewData["Title"] = "React and .Net";
+    ViewData["Model"] = this.Model;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div>
+        Attempt to combine react and .net
+
+
+        Steps to do:
+        - DONE: point webpack to Layout.cshtml file
+        - DONE: build folder in wwwroot
+        - DONE: React external config no longer loaded
+        - DONE: images in dist folder (probably same problem with font awesome etc.)
+        -- Applied fix: wwwroot is now dist folder (no subfolder)
+        - DONE: Lazy load javascript files are not loaded initially
+        -- Applied fix: name of js file indicated if it is a lazy load file so it is excluded ({no}.{hash}.js)
+        - Hot-Reload etc.Debugging react (hot reload etc.)
+        -- maybe the proxy stuff helps: https://blogs.taiga.nl/martijn/2019/10/11/goodbye-spaservices-it-was-fun-while-it-lasted/
+        -- also check integration in normal IIS
+        - routing (base path stuff)
+        - test more
+        -- with the test app that has more features (like external lib, font-awesome etc.)
+        -- test etc.
+
+        - cleanup
+        -- react code some stuff about config
+        -- webpack config (HtmlWebpackPlugin what is no longer needed??)
+        - improve
+        -- C# filewatch on dist folder
+        -- base path stuff dynamic -> calculate from request )
+        -- configuration that is shared between .net and etc.
+        -- include web.api -> this way we can use both
+    </div>

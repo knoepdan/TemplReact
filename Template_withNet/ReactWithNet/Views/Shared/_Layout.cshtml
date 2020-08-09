@@ -1,20 +1,39 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" data-href="/" />
-    <title>@ViewData["Title"] - WebApplicationTestMvc</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <base href="/" data-href="/">
+    <title>React template</title>
+
+    @{
+        var spaModel = (SpaModel) ViewData["Model"];
+
+
+    }
+
+    <meta name="title" content="react-typescript-boilerplate">
+    <meta name="description" content="A frontend boilerplate with React and Typescript.">
+    <meta name="keywords" content="react,typescript,boilerplate">
+    <link rel="icon" href="favicon.ico">
+
+    @foreach (var js in spaModel.JsRefs)
+    {
+        <script defer="defer" src="@js"></script>
+    }
+    @foreach (var css in spaModel.CssRefs)
+    {
+        <link href="@css" rel="stylesheet">
+    }
     <!--
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <% for (var css in htmlWebpackPlugin.files.css) { %>
-    <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet" />
-    <% } %>
+       <script defer="defer" src="3c6acddeedc8b2220d2e.js"></script>
+       <script defer="defer" src="vendor.2d7a30adc06b71f7bd30.js"></script>
+       <script defer="defer" src="app.46e1850ec298a3279e07.js"></script>
+       <link href="0.c5935c0faf4a99cb767a.css" rel="stylesheet">
         -->
 </head>
-
 <body>
     <div id="root"></div>
     @RenderBody()
-   </body>
+</body>
 </html>
