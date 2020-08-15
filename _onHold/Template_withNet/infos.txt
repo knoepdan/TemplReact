@@ -1,0 +1,19 @@
+### Current state 15.8.2020 ### 
+- on hole because not crucial at this point (and also no ideal solution found, probably approach that injects webpack js/css references into .cshtml file (like done at DK) is most promising to work with debugging or and productive build)
+- it would be nice because: 
+-- so configuration could be integrated in index (or initial html page). No additional load would be needed
+-- some configuration params could be calculated on the fly (like baseUrl)
+-- no cors needed
+- but maybe not needed because: 
+-- we already have a working external configuration
+-- configuration could be integrated into initial page in deployment step if it was really needed
+-- params calculated on the fly probably not needed (and if yes, the could be retrieved via api call)
+-- cors would a) not be a problem to configure, b) could be simply avoided by deploying the apps together
+
+
+
+
+
+
+### some info ### 
+https://blogs.taiga.nl/martijn/2019/10/11/goodbye-spaservices-it-was-fun-while-it-lasted/
