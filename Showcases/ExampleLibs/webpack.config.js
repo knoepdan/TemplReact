@@ -20,8 +20,8 @@ module.exports = {
     },
     output: {
         path: outPath,
-        filename: isProduction ? '[contenthash].js' : '[hash].js',
-        chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js',
+        filename: isProduction ? '[id][contenthash].js' : '[id][hash].js',
+        chunkFilename: isProduction ? '[id][name].[contenthash].js' : '[id][name].[hash].js',
     },
     target: 'web',
     resolve: {
@@ -55,8 +55,8 @@ module.exports = {
                             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                             {
                                 loader: 'css-loader',
-                                query: {
-                                    modules: true,
+                                options: {
+                                    //modules: true,
                                     sourceMap: !isProduction,
                                     importLoaders: 1,
                                     modules: {
@@ -68,19 +68,21 @@ module.exports = {
                             {
                                 loader: 'postcss-loader',
                                 options: {
-                                    ident: 'postcss',
-                                    plugins: [
-                                        require('postcss-import')({ addDependencyTo: webpack }),
-                                        require('postcss-url')(),
-                                        require('postcss-preset-env')({
-                                            /* use stage 2 features (defaults) */
-                                            stage: 2,
-                                        }),
-                                        require('postcss-reporter')(),
-                                        require('postcss-browser-reporter')({
-                                            disabled: isProduction,
-                                        }),
-                                    ],
+                                    //ident: 'postcss',
+                                    postcssOptions: {
+                                            plugins: [
+                                                require('postcss-import')({ addDependencyTo: webpack }),
+                                                require('postcss-url')(),
+                                                require('postcss-preset-env')({
+                                                    /* use stage 2 features (defaults) */
+                                                    stage: 2,
+                                                }),
+                                                require('postcss-reporter')(),
+                                                require('postcss-browser-reporter')({
+                                                disabled: isProduction,
+                                                }),
+                                            ],
+                                    },
                                 },
                             },
                         ],
@@ -142,7 +144,7 @@ module.exports = {
     },
     optimization: {
         splitChunks: {
-            name: true,
+            // name: true,
             cacheGroups: {
                 commons: {
                     chunks: 'initial',
@@ -151,7 +153,7 @@ module.exports = {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     chunks: 'all',
-                    filename: isProduction ? 'vendor.[contenthash].js' : 'vendor.[hash].js',
+                    filename: isProduction ? 'vendor.[id][contenthash].js' : 'vendor.[id][hash].js',
                     priority: -10,
                 },
             },
@@ -175,7 +177,7 @@ module.exports = {
 
         new MiniCssExtractPlugin({
             filename: '[hash].css',
-            disable: !isProduction,
+            //  disable: !isProduction,  -> outcommented with upgrade to 1.3.1
         }),
         new OptimizeCSSAssetsPlugin({
             // // this would work too but no sourcemap would be generated:  new OptimizeCSSAssetsPlugin({}),
@@ -223,15 +225,16 @@ module.exports = {
         historyApiFallback: {
             disableDotRule: true,
         },
+        open: true,
         stats: 'minimal',
         clientLogLevel: 'warning',
     },
     // https://webpack.js.org/configuration/devtool/
-    devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map',
-    node: {
+    devtool: isProduction ? 'hidden-source-map' : 'eval-cheap-module-source-map',
+    node: false /*{
         // workaround for webpack-dev-server issue
         // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
         fs: 'empty',
         net: 'empty',
-    },
+    },*/
 };
